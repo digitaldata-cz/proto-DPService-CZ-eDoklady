@@ -1,4 +1,4 @@
-module github.com/digitaldata-cz/proto-DPService-CZ-eDoklady
+module github.com/digitaldata-cz/proto_DPService_CZ_eDoklady
 
 go 1.23.3
 
