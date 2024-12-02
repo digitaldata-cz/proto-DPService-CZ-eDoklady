@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+option go_package = "github.com/digitaldata-cz/proto-DPService-CZ-eDoklady";
+
+message Empty {}
+
+// Info service
+service Info {
+    rpc GetInfo (Empty) returns (StatusResponse) {}
+}
+
+message StatusResponse {
+    bool Ready = 1;
+    string Status = 2;
+    string AppName = 3;
+    string AppVersion = 4;
+}
+
+// Certificate store service
+service CertificateStore {
+    rpc ListCertificates (Empty) returns (Certificates) {}
+    rpc SetCertificate (Certificate) returns (Empty) {}
+    rpc GetCertificate (Empty) returns (Certificate) {}
+}
+
+message Certificate {
+    string CommonName = 1;
+}
+
+message Certificates {
+    repeated string Certificates = 1;
+}
+
+// CZ eDoklady service
+service CZeDoklady {
+    rpc ListVirtualServices (Empty) returns (VirtualServices) {}
+    rpc CreateVirtualService (VirtualService) returns (VirtualService) {}
+    rpc DeleteVirtualService (VirtualService) returns (Empty) {}
+    rpc GetVirtualService (VirtualService) returns (VirtualService) {}
+
+    rpc StartServerTransaction (TransactionRequest) returns (Transaction) {}
+    rpc GetServerTransaction (Transaction) returns (Transaction) {}
+}
+
+message VirtualService {
+    string ID = 1;
+    string Name = 2;
+    string QRCode = 3;
+    string QrCodeValidUntil = 4;
+}
+message VirtualServices {
+    repeated VirtualService VirtualServices = 1;
+}
+message TransactionRequest {
+    VirtualService VirtualService = 1;
+    repeated DocumentRequest Documents = 2;
+}
+message DocumentRequest {
+    string DocumentName = 1;
+    int32 Portait = 2;
+    int32 FamilyName = 3;
+    int32 GivenName = 4;
+    int32 ResidentAddress = 5;
+    int32 PersonalNumber = 6;
+    int32 BirthDate = 7;
+    int32 BirthPlace = 8;
+    int32 Nationality = 9;
+    int32 Sex = 10;
+    int32 Signature = 11;
+    int32 DocumentNumber = 12;
+    int32 IssueDate = 13;
+    int32 ExpiryDate = 14;
+    int32 IssuingAuthority = 15;
+    int32 ChangeOfData = 16;
+    int32 OfficialRecords = 17;
+    int32 MaritalStatus = 18;
+    int32 Title = 19;
+    int32 AgeOver15 = 20;
+    int32 AgeOver18 = 21;
+    int32 AgeOver21 = 22;
+    int32 AgeOver60 = 23;
+    int32 AgeOver65 = 24;
+}
+message Transaction {
+    string ID = 1;
+    string State = 2;
+    string ValidTo = 3;
+    string ResultStatus = 4;
+    repeated DocumentResponse Documents = 5;
+}
+message DocumentResponse {
+    string DocumentName = 1;
+    string Portait = 2;
+    string FamilyName = 3;
+    string GivenName = 4;
+    string ResidentAddress = 5;
+    string PersonalNumber = 6;
+    string BirthDate = 7;
+    string BirthPlace = 8;
+    string Nationality = 9;
+    string Sex = 10;
+    string Signature = 11;
+    string DocumentNumber = 12;
+    string IssueDate = 13;
+    string ExpiryDate = 14;
+    string IssuingAuthority = 15;
+    string ChangeOfData = 16;
+    string OfficialRecords = 17;
+    string MaritalStatus = 18;
+    string Title = 19;
+    string AgeOver15 = 20;
+    string AgeOver18 = 21;
+    string AgeOver21 = 22;
+    string AgeOver60 = 23;
+    string AgeOver65 = 24;
+}
