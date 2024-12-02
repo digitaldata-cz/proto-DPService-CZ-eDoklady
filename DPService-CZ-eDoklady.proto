@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/digitaldata-cz/proto-DPService-CZ-eDoklady";
+option go_package = "github.com/digitaldata-cz/proto_DPService_CZ_eDoklady";
 
 message Empty {}
 
