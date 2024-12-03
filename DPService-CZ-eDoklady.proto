@@ -6,7 +6,10 @@ message Empty {}
 
 // Info service
 service Info {
-    rpc GetInfo (Empty) returns (StatusResponse) {}
+    rpc GetStatus (Empty) returns (StatusResponse) {}
+    rpc Heartbeat (Client) returns (Empty) {}
+    rpc ListClients (Empty) returns (Clients) {}
+    rpc DeleteClient (Client) returns (Empty) {}
 }
 
 message StatusResponse {
@@ -15,6 +18,16 @@ message StatusResponse {
     string AppName = 3;
     string AppVersion = 4;
 }
+message Client {
+    string GUID = 1;
+    string Hostname = 2;
+    string AppName = 3;
+    string AppVersion = 4;
+}
+message Clients {
+    repeated Client Clients = 1;
+}
+
 
 // Certificate store service
 service CertificateStore {
@@ -26,7 +39,6 @@ service CertificateStore {
 message Certificate {
     string CommonName = 1;
 }
-
 message Certificates {
     repeated string Certificates = 1;
 }
